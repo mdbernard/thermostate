@@ -1,0 +1,652 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Cascade Refrigeration Cycle Example &#8212; thermostate 0.4.3.dev0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ThermoState" href="thermostate.html" />
+    <link rel="prev" title="Regen-Reheat Rankine Cycle Example" href="regen-reheat-rankine-cycle-example.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+</style>
+<div class="section" id="Cascade-Refrigeration-Cycle-Example">
+<h1>Cascade Refrigeration Cycle Example<a class="headerlink" href="#Cascade-Refrigeration-Cycle-Example" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Imports">
+<h2>Imports<a class="headerlink" href="#Imports" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">thermostate</span> <span class="k">import</span> <span class="n">State</span><span class="p">,</span> <span class="n">Q_</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">EnglishEngineering</span> <span class="k">as</span> <span class="n">EE</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="Definitions">
+<h2>Definitions<a class="headerlink" href="#Definitions" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">sub_hiT</span> <span class="o">=</span> <span class="s1">&#39;R22&#39;</span>
+<span class="n">sub_loT</span> <span class="o">=</span> <span class="s1">&#39;R134A&#39;</span>
+
+<span class="n">T_1</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="o">-</span><span class="mf">30.0</span><span class="p">,</span> <span class="s1">&#39;degF&#39;</span><span class="p">)</span>
+<span class="n">x_1</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;dimensionless&#39;</span><span class="p">)</span>
+
+<span class="n">p_2</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">50.0</span><span class="p">,</span> <span class="s1">&#39;psi&#39;</span><span class="p">)</span>
+
+<span class="n">p_3</span> <span class="o">=</span> <span class="n">p_2</span>
+<span class="n">x_3</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;dimensionless&#39;</span><span class="p">)</span>
+
+<span class="n">delta_T_5</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="s1">&#39;delta_degF&#39;</span><span class="p">)</span>
+<span class="n">x_5</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;dimensionless&#39;</span><span class="p">)</span>
+
+<span class="n">p_6</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">250.0</span><span class="p">,</span> <span class="s1">&#39;psi&#39;</span><span class="p">)</span>
+
+<span class="n">p_7</span> <span class="o">=</span> <span class="n">p_6</span>
+<span class="n">x_7</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;dimensionless&#39;</span><span class="p">)</span>
+
+<span class="n">Qdot_in</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">20.0</span><span class="p">,</span> <span class="s1">&#39;refrigeration_tons&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="Problem-Statement">
+<h2>Problem Statement<a class="headerlink" href="#Problem-Statement" title="Permalink to this headline">¶</a></h2>
+<p>A two-stage cascade vapor-compression refrigeration system operates with
+R22 as the working fluid in the high-temperature cycle and R134A in the
+low-temperature cycle. For the R134A cycle, the working fluid enters the
+compressor as a saturated vapor at -30.0 fahrenheit and is compressed
+isentropically to 50 lbf/in.2 Saturated liquid leaves the intermediate
+heat exchanger at 50 lbf/in.2 and enters the expansion valve. For the
+R22 cycle, the working fluid enters the compressor as saturated vapor at
+a temperature 5 fahrenheit below that of the condensing temperature of
+the R134A in the intermediate heat exchanger. The R22 is compressed
+isentropically to 250 lbf/in.2 Saturated liquid then enters the
+expansion valve at 250 lbf/in.2. The refrigerating capacity of the
+cascade system is 20 ton_of_refrigeration. Determine</p>
+<ol class="arabic simple">
+<li>the power input to each compressor, in BTU/min</li>
+<li>the overall coefficient of performance of the cascade cycle</li>
+</ol>
+</div>
+<hr class="docutils" />
+<div class="section" id="Solution">
+<h2>Solution<a class="headerlink" href="#Solution" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="1.-the-power-input-to-each-compressor">
+<h3>1. the power input to each compressor<a class="headerlink" href="#1.-the-power-input-to-each-compressor" title="Permalink to this headline">¶</a></h3>
+<p>The power input to each compressor can be found by</p>
+<div class="math notranslate nohighlight">
+\[\dot{W}_{cv} = \dot{m}(h_i - h_e)\]</div>
+<p>To find the enthalpies, we need to fix all of the states.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">st_1</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">sub_loT</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x_1</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T_1</span><span class="p">)</span>
+<span class="n">h_1</span> <span class="o">=</span> <span class="n">st_1</span><span class="o">.</span><span class="n">h</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">EE</span><span class="o">.</span><span class="n">h</span><span class="p">)</span>
+<span class="n">s_1</span> <span class="o">=</span> <span class="n">st_1</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">EE</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+<span class="n">p_1</span> <span class="o">=</span> <span class="n">st_1</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">EE</span><span class="o">.</span><span class="n">p</span><span class="p">)</span>
+
+<span class="n">s_2</span> <span class="o">=</span> <span class="n">s_1</span>
+<span class="n">st_2</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">sub_loT</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p_2</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s_1</span><span class="p">)</span>
+<span class="n">h_2</span> <span class="o">=</span> <span class="n">st_2</span><span class="o">.</span><span class="n">h</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">EE</span><span class="o">.</span><span class="n">h</span><span class="p">)</span>
+<span class="n">T_2</span> <span class="o">=</span> <span class="n">st_2</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">EE</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+<span class="n">st_3</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">sub_loT</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p_3</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x_3</span><span class="p">)</span>
+<span class="n">T_3</span> <span class="o">=</span> <span class="n">st_3</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">EE</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">h_3</span> <span class="o">=</span> <span class="n">st_3</span><span class="o">.</span><span class="n">h</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">EE</span><span class="o">.</span><span class="n">h</span><span class="p">)</span>
+<span class="n">s_3</span> <span class="o">=</span> <span class="n">st_3</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">EE</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+
+<span class="n">h_4</span> <span class="o">=</span> <span class="n">h_3</span>
+<span class="n">p_4</span> <span class="o">=</span> <span class="n">p_1</span>
+<span class="n">st_4</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">sub_loT</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p_4</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="n">h_4</span><span class="p">)</span>
+<span class="n">T_4</span> <span class="o">=</span> <span class="n">st_4</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">EE</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">s_4</span> <span class="o">=</span> <span class="n">st_4</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">EE</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+<span class="n">x_4</span> <span class="o">=</span> <span class="n">st_4</span><span class="o">.</span><span class="n">x</span>
+
+<span class="n">T_5</span> <span class="o">=</span> <span class="n">T_3</span> <span class="o">+</span> <span class="n">delta_T_5</span>
+<span class="n">st_5</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">sub_hiT</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T_5</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x_5</span><span class="p">)</span>
+<span class="n">h_5</span> <span class="o">=</span> <span class="n">st_5</span><span class="o">.</span><span class="n">h</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">EE</span><span class="o">.</span><span class="n">h</span><span class="p">)</span>
+<span class="n">p_5</span> <span class="o">=</span> <span class="n">st_5</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">EE</span><span class="o">.</span><span class="n">p</span><span class="p">)</span>
+<span class="n">s_5</span> <span class="o">=</span> <span class="n">st_5</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">EE</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+
+<span class="n">s_6</span> <span class="o">=</span> <span class="n">s_5</span>
+<span class="n">st_6</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">sub_hiT</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s_6</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p_6</span><span class="p">)</span>
+<span class="n">h_6</span> <span class="o">=</span> <span class="n">st_6</span><span class="o">.</span><span class="n">h</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">EE</span><span class="o">.</span><span class="n">h</span><span class="p">)</span>
+<span class="n">T_6</span> <span class="o">=</span> <span class="n">st_6</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">EE</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+<span class="n">st_7</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">sub_hiT</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p_7</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x_7</span><span class="p">)</span>
+<span class="n">T_7</span> <span class="o">=</span> <span class="n">st_7</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">EE</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">h_7</span> <span class="o">=</span> <span class="n">st_7</span><span class="o">.</span><span class="n">h</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">EE</span><span class="o">.</span><span class="n">h</span><span class="p">)</span>
+<span class="n">s_7</span> <span class="o">=</span> <span class="n">st_7</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">EE</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+
+<span class="n">h_8</span> <span class="o">=</span> <span class="n">h_7</span>
+<span class="n">p_8</span> <span class="o">=</span> <span class="n">p_5</span>
+<span class="n">st_8</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">sub_hiT</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p_8</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="n">h_8</span><span class="p">)</span>
+<span class="n">T_8</span> <span class="o">=</span> <span class="n">st_8</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">EE</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">s_8</span> <span class="o">=</span> <span class="n">st_8</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">EE</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+<span class="n">x_8</span> <span class="o">=</span> <span class="n">st_8</span><span class="o">.</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<p>Summarizing the states:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="11%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">S
+t
+a
+t
+e</th>
+<th class="head">T</th>
+<th class="head">p</th>
+<th class="head">h</th>
+<th class="head">s</th>
+<th class="head">x</th>
+<th class="head">phase</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>-30.00
+degF</td>
+<td>9.86
+pound_for
+ce_per_sq
+uare_inch</td>
+<td>162.30
+btu /
+pound</td>
+<td>0.4196
+btu /
+degR /
+pound</td>
+<td>100.00%</td>
+<td>twoph
+ase</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>58.23
+degF</td>
+<td>50.00
+pound_for
+ce_per_sq
+uare_inch</td>
+<td>176.42
+btu /
+pound</td>
+<td>0.4196
+btu /
+degR /
+pound</td>
+<td>—</td>
+<td>gas</td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td>40.27
+degF</td>
+<td>50.00
+pound_for
+ce_per_sq
+uare_inch</td>
+<td>88.65 btu
+/ pound</td>
+<td>0.2442
+btu /
+degR /
+pound</td>
+<td>0.00%</td>
+<td>twoph
+ase</td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>-30.00
+degF</td>
+<td>9.86
+pound_for
+ce_per_sq
+uare_inch</td>
+<td>88.65 btu
+/ pound</td>
+<td>0.2482
+btu /
+degR /
+pound</td>
+<td>22.96%</td>
+<td>twoph
+ase</td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td>35.27
+degF</td>
+<td>76.59
+pound_for
+ce_per_sq
+uare_inch</td>
+<td>174.42
+btu /
+pound</td>
+<td>0.4175
+btu /
+degR /
+pound</td>
+<td>100.00%</td>
+<td>twoph
+ase</td>
+</tr>
+<tr class="row-odd"><td>6</td>
+<td>146.75
+degF</td>
+<td>250.00
+pound_for
+ce_per_sq
+uare_inch</td>
+<td>187.12
+btu /
+pound</td>
+<td>0.4175
+btu /
+degR /
+pound</td>
+<td>—</td>
+<td>gas</td>
+</tr>
+<tr class="row-even"><td>7</td>
+<td>112.76
+degF</td>
+<td>250.00
+pound_for
+ce_per_sq
+uare_inch</td>
+<td>110.14
+btu /
+pound</td>
+<td>0.2834
+btu /
+degR /
+pound</td>
+<td>0.00%</td>
+<td>twoph
+ase</td>
+</tr>
+<tr class="row-odd"><td>8</td>
+<td>35.27
+degF</td>
+<td>76.59
+pound_for
+ce_per_sq
+uare_inch</td>
+<td>110.14
+btu /
+pound</td>
+<td>0.2876
+btu /
+degR /
+pound</td>
+<td>26.55%</td>
+<td>twoph
+ase</td>
+</tr>
+</tbody>
+</table>
+<p>The mass flow rate of the R134a is found from the refrigeration capacity</p>
+<div class="math notranslate nohighlight">
+\[\dot{m}_{\text{R134A}} = \frac{\dot{Q}_{in}}{h_1 - h_4}\]</div>
+<p>while the mass flow rate of the R22 is found from the intermediate heat
+exchanger</p>
+<div class="math notranslate nohighlight">
+\[\dot{m}_{\text{R22}} = \frac{\dot{m}_{\text{R134A}}\left(h_2 - h_3\right)}{h_5 - h_8}\]</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">mdot_r134a</span> <span class="o">=</span> <span class="p">(</span><span class="n">Qdot_in</span><span class="o">/</span><span class="p">(</span><span class="n">h_1</span> <span class="o">-</span> <span class="n">h_4</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;lb/min&#39;</span><span class="p">)</span>
+<span class="n">Wdot_loT</span> <span class="o">=</span> <span class="p">(</span><span class="n">mdot_r134a</span><span class="o">*</span><span class="p">(</span><span class="n">h_1</span> <span class="o">-</span> <span class="n">h_2</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;BTU/min&#39;</span><span class="p">)</span>
+
+<span class="n">mdot_r22</span> <span class="o">=</span> <span class="n">mdot_r134a</span><span class="o">*</span><span class="p">(</span><span class="n">h_2</span> <span class="o">-</span> <span class="n">h_3</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">h_5</span> <span class="o">-</span> <span class="n">h_8</span><span class="p">)</span>
+<span class="n">Wdot_hiT</span> <span class="o">=</span> <span class="p">(</span><span class="n">mdot_r22</span><span class="o">*</span><span class="p">(</span><span class="n">h_5</span> <span class="o">-</span> <span class="n">h_6</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;BTU/min&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="alert alert-success"><p><strong>Answer:</strong> The compressor work for the low-temperature cycle is
+<span class="math notranslate nohighlight">\(\dot{W}_{\text{R134A}} =\)</span> -766.52 btu / minute and the work for
+the high temperature cycle is <span class="math notranslate nohighlight">\(\dot{W}_{\text{R22}} =\)</span> -941.38 btu
+/ minute</p>
+</div></div>
+<div class="section" id="2.-The-coefficient-of-performance">
+<h3>2. The coefficient of performance<a class="headerlink" href="#2.-The-coefficient-of-performance" title="Permalink to this headline">¶</a></h3>
+<p>The coefficient of performance of this refrigeration cycle is defined as</p>
+<div class="math notranslate nohighlight">
+\[\beta = \frac{\dot{Q}_{in}}{\lvert\dot{W}_{\text{R134A}} + \dot{W}_{\text{R22}}\rvert}\]</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">beta</span> <span class="o">=</span> <span class="p">(</span><span class="n">Qdot_in</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="n">Wdot_loT</span> <span class="o">+</span> <span class="n">Wdot_hiT</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;dimensionless&#39;</span><span class="p">)</span>
+<span class="n">beta_max</span> <span class="o">=</span> <span class="p">(</span><span class="n">T_4</span><span class="o">/</span><span class="p">(</span><span class="n">T_7</span> <span class="o">-</span> <span class="n">T_4</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;dimensionless&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="alert alert-success"><p><strong>Answer:</strong> The coefficient of performance is <span class="math notranslate nohighlight">\(\beta =\)</span> 2.34,
+while the maximum coefficient of performance for a refrigeration cycle
+operating between <span class="math notranslate nohighlight">\(T_C =\)</span> -30.00 degF and <span class="math notranslate nohighlight">\(T_H =\)</span> 112.76
+degF is <span class="math notranslate nohighlight">\(\beta_{\text{max}} =\)</span> 3.01 dimensionless. The actual
+cycle has a lower COP, so it is possible.</p>
+</div></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">thermostate</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=bryanwweber&repo=thermostate&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="air-standard-brayton-cycle-example.html">Air-Standard Brayton Cycle Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cold-air-brayton-cycle-example.html">Cold-Air Standard Brayton Cycle Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diesel-cycle-example.html">Diesel Cycle Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rankine-cycle-example.html">Rankine Cycle Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="regen-reheat-rankine-cycle-example.html">Regen-Reheat Rankine Cycle Example</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Cascade Refrigeration Cycle Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="thermostate.html">ThermoState</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="examples.html">Examples</a><ul>
+      <li>Previous: <a href="regen-reheat-rankine-cycle-example.html" title="previous chapter">Regen-Reheat Rankine Cycle Example</a></li>
+      <li>Next: <a href="thermostate.html" title="next chapter">ThermoState</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+<div class="footer">
+  Documentation licensed under a
+  <a href="https://creativecommons.org/licenses/by/4.0/">
+    CC-BY 4.0 License.
+  </a>
+  
+  |
+  Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.1</a>
+  &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+  
+  |
+  <a href="_sources/cascade-refrigeration-cycle-example.ipynb.txt"
+      rel="nofollow">Page source</a>
+  </div>
+
+  
+  <a href="https://github.com/bryanwweber/thermostate" class="github">
+    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+  </a>
+  
+</div>
+  </body>
+</html>

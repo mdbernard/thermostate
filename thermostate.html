@@ -13,10 +13,11 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Regen-Reheat Rankine Cycle Example" href="regen-reheat-rankine-cycle-example.html" />
+    <link rel="next" title="Change Log" href="CHANGELOG.html" />
+    <link rel="prev" title="Cascade Refrigeration Cycle Example" href="cascade-refrigeration-cycle-example.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -33,8 +34,10 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="module-thermostate.thermostate">
-<span id="thermostate"></span><h1>ThermoState<a class="headerlink" href="#module-thermostate.thermostate" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="thermostate">
+<h1>ThermoState<a class="headerlink" href="#thermostate" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-thermostate.thermostate">
+<span id="thermostate-thermostate-module"></span><h2><code class="docutils literal notranslate"><span class="pre">thermostate.thermostate</span></code> module<a class="headerlink" href="#module-thermostate.thermostate" title="Permalink to this headline">¶</a></h2>
 <p>Base ThermoState module</p>
 <dl class="class">
 <dt id="thermostate.thermostate.State">
@@ -45,7 +48,7 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>substance</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – One of the substances supported by CoolProp</li>
+<li><strong>substance</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – One of the substances supported by CoolProp</li>
 <li><strong>T</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">pint.UnitRegistry.Quantity</span></code>) – Temperature</li>
 <li><strong>p</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">pint.UnitRegistry.Quantity</span></code>) – Pressure</li>
 <li><strong>u</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">pint.UnitRegistry.Quantity</span></code>) – Mass-specific internal energy</li>
@@ -78,6 +81,195 @@ the user code. This function removes the additional context.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-thermostate.abbreviations">
+<span id="thermostate-abbreviations-module"></span><h2><code class="docutils literal notranslate"><span class="pre">thermostate.abbreviations</span></code> module<a class="headerlink" href="#module-thermostate.abbreviations" title="Permalink to this headline">¶</a></h2>
+<p>This module contains classes with attributes representing the common property units</p>
+<dl class="class">
+<dt id="thermostate.abbreviations.EnglishEngineering">
+<em class="property">class </em><code class="descclassname">thermostate.abbreviations.</code><code class="descname">EnglishEngineering</code><a class="headerlink" href="#thermostate.abbreviations.EnglishEngineering" title="Permalink to this definition">¶</a></dt>
+<dd><p>String representations of common units.</p>
+<p>The attributes of this class are strings that represent the common units for
+thermodynamics calculations.</p>
+<dl class="attribute">
+<dt id="thermostate.abbreviations.EnglishEngineering.h">
+<code class="descname">h</code><a class="headerlink" href="#thermostate.abbreviations.EnglishEngineering.h" title="Permalink to this definition">¶</a></dt>
+<dd><p>BTU/lb</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="thermostate.abbreviations.EnglishEngineering.p">
+<code class="descname">p</code><a class="headerlink" href="#thermostate.abbreviations.EnglishEngineering.p" title="Permalink to this definition">¶</a></dt>
+<dd><p>psi</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="thermostate.abbreviations.EnglishEngineering.s">
+<code class="descname">s</code><a class="headerlink" href="#thermostate.abbreviations.EnglishEngineering.s" title="Permalink to this definition">¶</a></dt>
+<dd><p>BTU/(lb*degR)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="thermostate.abbreviations.EnglishEngineering.T">
+<code class="descname">T</code><a class="headerlink" href="#thermostate.abbreviations.EnglishEngineering.T" title="Permalink to this definition">¶</a></dt>
+<dd><p>degF</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="thermostate.abbreviations.EnglishEngineering.u">
+<code class="descname">u</code><a class="headerlink" href="#thermostate.abbreviations.EnglishEngineering.u" title="Permalink to this definition">¶</a></dt>
+<dd><p>BTU/lb</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="thermostate.abbreviations.EnglishEngineering.v">
+<code class="descname">v</code><a class="headerlink" href="#thermostate.abbreviations.EnglishEngineering.v" title="Permalink to this definition">¶</a></dt>
+<dd><p>ft**3/lb</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="thermostate.abbreviations.SystemInternational">
+<em class="property">class </em><code class="descclassname">thermostate.abbreviations.</code><code class="descname">SystemInternational</code><a class="headerlink" href="#thermostate.abbreviations.SystemInternational" title="Permalink to this definition">¶</a></dt>
+<dd><p>String representations of common units.</p>
+<p>The attributes of this class are strings that represent the common units for
+thermodynamics calculations.</p>
+<dl class="attribute">
+<dt id="thermostate.abbreviations.SystemInternational.h">
+<code class="descname">h</code><a class="headerlink" href="#thermostate.abbreviations.SystemInternational.h" title="Permalink to this definition">¶</a></dt>
+<dd><p>kJ/kg</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="thermostate.abbreviations.SystemInternational.p">
+<code class="descname">p</code><a class="headerlink" href="#thermostate.abbreviations.SystemInternational.p" title="Permalink to this definition">¶</a></dt>
+<dd><p>bar</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="thermostate.abbreviations.SystemInternational.s">
+<code class="descname">s</code><a class="headerlink" href="#thermostate.abbreviations.SystemInternational.s" title="Permalink to this definition">¶</a></dt>
+<dd><p>kJ/(kg*K)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="thermostate.abbreviations.SystemInternational.T">
+<code class="descname">T</code><a class="headerlink" href="#thermostate.abbreviations.SystemInternational.T" title="Permalink to this definition">¶</a></dt>
+<dd><p>degC</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="thermostate.abbreviations.SystemInternational.u">
+<code class="descname">u</code><a class="headerlink" href="#thermostate.abbreviations.SystemInternational.u" title="Permalink to this definition">¶</a></dt>
+<dd><p>kJ/kg</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="thermostate.abbreviations.SystemInternational.v">
+<code class="descname">v</code><a class="headerlink" href="#thermostate.abbreviations.SystemInternational.v" title="Permalink to this definition">¶</a></dt>
+<dd><p>m**3/lb</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
 
 
           </div>
@@ -105,16 +297,25 @@ the user code. This function removes the additional context.</p>
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">ThermoState</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ThermoState</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-thermostate.thermostate"><code class="docutils literal notranslate"><span class="pre">thermostate.thermostate</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-thermostate.abbreviations"><code class="docutils literal notranslate"><span class="pre">thermostate.abbreviations</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="regen-reheat-rankine-cycle-example.html" title="previous chapter">Regen-Reheat Rankine Cycle Example</a></li>
+      <li>Previous: <a href="cascade-refrigeration-cycle-example.html" title="previous chapter">Cascade Refrigeration Cycle Example</a></li>
+      <li>Next: <a href="CHANGELOG.html" title="next chapter">Change Log</a></li>
   </ul></li>
 </ul>
 </div>
@@ -130,6 +331,14 @@ the user code. This function removes the additional context.</p>
     </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -141,8 +350,8 @@ the user code. This function removes the additional context.</p>
   </a>
   
   |
-  Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.9</a>
-  &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+  Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.1</a>
+  &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
   
   |
   <a href="_sources/thermostate.rst.txt"

@@ -13,11 +13,11 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Examples" href="examples.html" />
-    <link rel="prev" title="Welcome to thermostate’s documentation!" href="index.html" />
+    <link rel="prev" title="Installation" href="installation.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -219,7 +219,7 @@ local variables</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">thermostate</span> <span class="kn">import</span> <span class="n">State</span><span class="p">,</span> <span class="n">Q_</span><span class="p">,</span> <span class="n">units</span>
+<span></span><span class="kn">from</span> <span class="nn">thermostate</span> <span class="k">import</span> <span class="n">State</span><span class="p">,</span> <span class="n">Q_</span><span class="p">,</span> <span class="n">units</span>
 </pre></div>
 </div>
 </div>
@@ -345,23 +345,23 @@ single property at a time. The syntax is</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">st</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">substance</span><span class="p">,</span> <span class="n">property_1</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="n">property_2</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Note that the capitalization of the properties is important! The <code class="docutils literal notranslate"><span class="pre">p</span></code>
-is lower case while the <code class="docutils literal notranslate"><span class="pre">T</span></code> is upper case (lower case <code class="docutils literal notranslate"><span class="pre">t</span></code> means
-time).</p>
 <div class="admonition warning">
-<p class="admonition-title"><strong>Warning:</strong></p>
+<p class="admonition-title"><strong>Warning</strong></p>
 <p>Remember that two independent and intensive properties are required to
 set the state!</p>
 </div>
 <p>To demonstrate, we will set the <code class="docutils literal notranslate"><span class="pre">T</span></code> and <code class="docutils literal notranslate"><span class="pre">p</span></code> properties of the state
-and set them equal to the temperature and pressure we defined above.</p>
+and set them equal to the temperature and pressure we defined above.
+Note that the capitalization of the properties is important! The <code class="docutils literal notranslate"><span class="pre">p</span></code>
+is lower case while the <code class="docutils literal notranslate"><span class="pre">T</span></code> is upper case (lower case <code class="docutils literal notranslate"><span class="pre">t</span></code> means
+time).</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;T = {}, p = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">T_1</span><span class="p">,</span> <span class="n">p_1</span><span class="p">))</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;T = </span><span class="si">{}</span><span class="s1">, p = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">T_1</span><span class="p">,</span> <span class="n">p_1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -396,10 +396,10 @@ following code is exactly equivalent to what we did before.</p>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">luke</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;atm&#39;</span><span class="p">)</span>
 <span class="n">leia</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">400.0</span><span class="p">,</span> <span class="s1">&#39;K&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Does luke equal p_1?&#39;</span><span class="p">,</span> <span class="n">luke</span> <span class="o">==</span> <span class="n">p_1</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Does leia equal T_1?&#39;</span><span class="p">,</span> <span class="n">leia</span> <span class="o">==</span> <span class="n">T_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Does luke equal p_1?&#39;</span><span class="p">,</span> <span class="n">luke</span> <span class="o">==</span> <span class="n">p_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Does leia equal T_1?&#39;</span><span class="p">,</span> <span class="n">leia</span> <span class="o">==</span> <span class="n">T_1</span><span class="p">)</span>
 <span class="n">st_starwars</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">substance</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">leia</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">luke</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Does st_starwars equal st_1?&#39;</span><span class="p">,</span> <span class="n">st_starwars</span> <span class="o">==</span> <span class="n">st_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Does st_starwars equal st_1?&#39;</span><span class="p">,</span> <span class="n">st_starwars</span> <span class="o">==</span> <span class="n">st_1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -414,13 +414,14 @@ Does st_starwars equal st_1? True
 </pre></div></div>
 </div>
 <div class="admonition warning">
-<strong>Warning:</strong> To avoid confusing yourself, name your variables to
-something useful. For instance, use the property symbol, then an
-underscore, then the state number, as in <code class="docutils literal notranslate"><span class="pre">p_1</span> <span class="pre">=</span> <span class="pre">Q_(1.0,</span> <span class="pre">'atm')</span></code> to
-indicate the pressure at state 1. In my notes and solutions, this is the
-convention that I will follow, and I will use <code class="docutils literal notranslate"><span class="pre">st_#</span></code> to indicate a
-<code class="docutils literal notranslate"><span class="pre">State</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">st_1</span></code> is state 1, <code class="docutils literal notranslate"><span class="pre">st_2</span></code> is state 2, and so
-forth).</div>
+<p class="admonition-title"><strong>Warning</strong></p>
+<p>To avoid confusing yourself, name your variables to something useful.
+For instance, use the property symbol, then an underscore, then the
+state number, as in <code class="docutils literal notranslate"><span class="pre">p_1</span> <span class="pre">=</span> <span class="pre">Q_(1.0,</span> <span class="pre">'atm')</span></code> to indicate the pressure at
+state 1. In my notes and solutions, this is the convention that I will
+follow, and I will use <code class="docutils literal notranslate"><span class="pre">st_#</span></code> to indicate a <code class="docutils literal notranslate"><span class="pre">State</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">st_1</span></code>
+is state 1, <code class="docutils literal notranslate"><span class="pre">st_2</span></code> is state 2, and so forth).</p>
+</div>
 <p>In theory, any two pairs of independent properties can be used to set
 the state. In reality, the pairs of properties available to set the
 state is slightly limited because of the way the equation of state is
@@ -468,7 +469,7 @@ state). The syntax is</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title"><strong>Note:</strong></p>
+<p class="admonition-title"><strong>Note</strong></p>
 <p>Capitalization is important! The temperature has upper case <code class="docutils literal notranslate"><span class="pre">T</span></code>, while
 the other properties are lower case to indicate that they are
 mass-specific quantities.</p>
@@ -479,16 +480,16 @@ mass-specific quantities.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;T_1 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_1</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;p_1 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_1</span><span class="o">.</span><span class="n">p</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;v_1 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_1</span><span class="o">.</span><span class="n">v</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;u_1 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_1</span><span class="o">.</span><span class="n">u</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;h_1 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_1</span><span class="o">.</span><span class="n">h</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;s_1 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_1</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;x_1 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_1</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;cp_1 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_1</span><span class="o">.</span><span class="n">cp</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;cv_1 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_1</span><span class="o">.</span><span class="n">cv</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;phase_1 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_1</span><span class="o">.</span><span class="n">phase</span><span class="p">))</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;T_1 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_1</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p_1 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_1</span><span class="o">.</span><span class="n">p</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;v_1 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_1</span><span class="o">.</span><span class="n">v</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;u_1 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_1</span><span class="o">.</span><span class="n">u</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;h_1 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_1</span><span class="o">.</span><span class="n">h</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;s_1 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_1</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x_1 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_1</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cp_1 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_1</span><span class="o">.</span><span class="n">cp</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cv_1 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_1</span><span class="o">.</span><span class="n">cv</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;phase_1 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_1</span><span class="o">.</span><span class="n">phase</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -527,13 +528,13 @@ instance:</p>
 <span></span><span class="n">T_2</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">100.0</span><span class="p">,</span> <span class="s1">&#39;degC&#39;</span><span class="p">)</span>
 <span class="n">x_2</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="s1">&#39;dimensionless&#39;</span><span class="p">)</span>
 <span class="n">st_2</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="s1">&#39;water&#39;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T_2</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x_2</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;T_2 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_2</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;p_2 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_2</span><span class="o">.</span><span class="n">p</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;v_2 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_2</span><span class="o">.</span><span class="n">v</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;u_2 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_2</span><span class="o">.</span><span class="n">u</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;h_2 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_2</span><span class="o">.</span><span class="n">h</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;s_2 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_2</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;x_2 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_2</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;T_2 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_2</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p_2 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_2</span><span class="o">.</span><span class="n">p</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;v_2 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_2</span><span class="o">.</span><span class="n">v</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;u_2 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_2</span><span class="o">.</span><span class="n">u</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;h_2 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_2</span><span class="o">.</span><span class="n">h</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;s_2 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_2</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x_2 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_2</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -586,8 +587,8 @@ compatible. The syntax is <code class="docutils literal notranslate"><span class
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="n">st_2</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;degF&#39;</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">st_2</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;BTU/(lb*degR)&#39;</span><span class="p">))</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">st_2</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;degF&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">st_2</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;BTU/(lb*degR)&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -601,7 +602,7 @@ compatible. The syntax is <code class="docutils literal notranslate"><span class
 </pre></div></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title"><strong>Note:</strong></p>
+<p class="admonition-title"><strong>Note</strong></p>
 <p>The values are always converted in the <code class="docutils literal notranslate"><span class="pre">State</span></code> to SI units, no matter
 what the input units are. Therefore, if you want EE units as an output,
 you have to convert.</p>
@@ -609,7 +610,7 @@ you have to convert.</p>
 <p>If we try to convert to a unit with incompatible dimensions, Pint will
 raise a <code class="docutils literal notranslate"><span class="pre">DimenstionalityError</span></code> exception.</p>
 <div class="admonition warning">
-<p class="admonition-title"><strong>Warning:</strong></p>
+<p class="admonition-title"><strong>Warning</strong></p>
 <p>If you get a <code class="docutils literal notranslate"><span class="pre">DimensionalityError</span></code>, examine your conversion very
 closely. The error message will tell you why the dimensions are
 incompatible!</p>
@@ -620,7 +621,7 @@ incompatible!</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">print</span><span class="p">(</span><span class="n">st_2</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;joule&#39;</span><span class="p">))</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">st_2</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;joule&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -631,7 +632,7 @@ incompatible!</p>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">DimensionalityError</span>                       Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-14-9725ac474279&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">&lt;ipython-input-14-9725ac474279&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
 <span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>print<span class="ansi-blue-fg">(</span>st_2<span class="ansi-blue-fg">.</span>T<span class="ansi-blue-fg">.</span>to<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;joule&#39;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
 
 <span class="ansi-red-fg">DimensionalityError</span>: Cannot convert from &#39;kelvin&#39; ([temperature]) to &#39;joule&#39; ([length] ** 2 * [mass] / [time] ** 2)
@@ -665,7 +666,7 @@ convert <strong>energy</strong> to <strong>power</strong> (again, not allowed):<
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">DimensionalityError</span>                       Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-15-352febbe91fd&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">&lt;ipython-input-15-352febbe91fd&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
 <span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>Q_<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1000.0</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;joule&#39;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>to<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;watt&#39;</span><span class="ansi-blue-fg">)</span>
 
 <span class="ansi-red-fg">DimensionalityError</span>: Cannot convert from &#39;joule&#39; ([length] ** 2 * [mass] / [time] ** 2) to &#39;watt&#39; ([length] ** 2 * [mass] / [time] ** 3)
@@ -705,7 +706,7 @@ input</li>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">StateError</span>                                Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-16-95363eb6e667&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">&lt;ipython-input-16-95363eb6e667&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
 <span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>State<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;water&#39;</span><span class="ansi-blue-fg">,</span> v<span class="ansi-blue-fg">=</span>Q_<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1000.0</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;degC&#39;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> p<span class="ansi-blue-fg">=</span>Q_<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1.0</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;bar&#39;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
 
 <span class="ansi-red-fg">StateError</span>: The dimensions for v must be [length] ** 3 / [mass]
@@ -728,13 +729,13 @@ of the State by using the attributes.</p>
 <span></span><span class="n">h_3</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">2000.0</span><span class="p">,</span> <span class="s1">&#39;kJ/kg&#39;</span><span class="p">)</span>
 <span class="n">s_3</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">3.10</span><span class="p">,</span> <span class="s1">&#39;kJ/(kg*K)&#39;</span><span class="p">)</span>
 <span class="n">st_3</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="s1">&#39;water&#39;</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="n">h_3</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s_3</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;T_3 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_3</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;p_3 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_3</span><span class="o">.</span><span class="n">p</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;v_3 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_3</span><span class="o">.</span><span class="n">v</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;u_3 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_3</span><span class="o">.</span><span class="n">u</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;h_3 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_3</span><span class="o">.</span><span class="n">h</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;s_3 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_3</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;x_3 = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_3</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;T_3 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_3</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p_3 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_3</span><span class="o">.</span><span class="n">p</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;v_3 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_3</span><span class="o">.</span><span class="n">v</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;u_3 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_3</span><span class="o">.</span><span class="n">u</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;h_3 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_3</span><span class="o">.</span><span class="n">h</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;s_3 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_3</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x_3 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">st_3</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -781,6 +782,7 @@ x_3 = None
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#Pint-and-Units">Pint and Units</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ThermoState">ThermoState</a></li>
@@ -790,13 +792,16 @@ x_3 = None
 </li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="thermostate.html">ThermoState</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">Welcome to thermostate’s documentation!</a></li>
+      <li>Previous: <a href="installation.html" title="previous chapter">Installation</a></li>
       <li>Next: <a href="examples.html" title="next chapter">Examples</a></li>
   </ul></li>
 </ul>
@@ -813,6 +818,14 @@ x_3 = None
     </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -824,8 +837,8 @@ x_3 = None
   </a>
   
   |
-  Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.9</a>
-  &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+  Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.1</a>
+  &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
   
   |
   <a href="_sources/Tutorial.ipynb.txt"
