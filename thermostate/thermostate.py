@@ -8,6 +8,7 @@ import CoolProp
 from pint import UnitRegistry, DimensionalityError
 from pint.unit import UnitsContainer, UnitDefinition
 from pint.converters import ScaleConverter
+import matplotlib.pyplot as plt
 try:  # pragma: no cover
     from IPython.core.ultratb import AutoFormattedTB
 except ImportError:  # pragma: no cover
@@ -344,3 +345,28 @@ class Process:
             raise ProcessError(process_error_msg.format(self.process_type, property,
                                                         property, self.state_1.p,
                                                         property, self.state_2.p))
+
+    def diagram(self, vertical_axis='T', horizontal_axis='s', dome=True, approx=True):
+        """ Creates a MatplotlLib diagram showing the process between
+            the initial and final states.
+
+            Default:
+            Graph the process on a T-s diagram, and show the
+            vapor dome if the process touches/crosses the vapor dome.
+
+            Config:
+              - vertical_axis: `str`, the property to graph on the vertical
+                axis. Must be one of 'T', 'p', 'v', 's', 'h', 'cv', 'cp'.
+              - horizontal_axis: `str`, the property to graph on the horizontal
+                axis. Must be one of 'T', 'p', 'v', 's', 'h', 'cv', 'cp'.
+              - dome: `boolean`, whether or not to show the vapor dome on the
+                diagram if the process touches/crosses the vapor dome.
+              - approx: `boolean`, whether to make an approximate diagram by
+                interpolating between values. Setting to False increases
+                accuracy of graph at expense of increased processing.
+        """
+
+        pass
+
+
+
