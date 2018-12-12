@@ -76,7 +76,26 @@ class StateError(Exception):
                 if 'site-packages' in line:
                     first_line = i
                     break
-            return stb[:first_line] + stb[-1:]
+
+
+class ProcessError(Exception):
+    """Errors associated with the `Process` object"""
+
+    def _render_traceback_(self):
+        """Render a minimized version of the `ProcessError` traceback
+
+        See `StateError` _render_traceback_ docstring for explanation.
+        """
+        if AutoFormattedTB is not None:
+            a = AutoFormattedTB(mode='Context',
+                                color_scheme='Neutral',
+                                tb_offset=1)
+            etype, evalue, tb = sys.exc_info()
+            stb = a.structured_traceback(etype, evalue, tb, tb_offset=1)
+            for i, line in enumerate(stb):
+                if 'site-packages' in line:
+                    first_line = i
+                    break
 
 
 class State(object):
@@ -276,3 +295,52 @@ class State(object):
                 value = Q_(self._abstract_state.keyed_output(p), self._SI_units[prop])
 
             setattr(self, '_' + prop, value)
+
+
+class Process:
+    """ This class allows for visualization of thermodynamic processes.
+        Supports the following types of processes:
+          - isobaric
+          - isothermal
+          - isentropic
+          - isenthalpic
+
+        Each process is defined by 3 aspects:
+          - an initial state, a `State` object
+          - a final state, a `State` object
+          - a process type, a `str`
+
+        Raises a `ProcessError` if the process_type cannot convert the
+        initial state into the final state.
+    """
+
+    def __init__(self, state_1, state_2, process_type):
+        self.state_1 = state_1
+        self.state_2 = state_2
+        self.process_type = process_type
+
+        self._validate()
+
+    def _validate(self):
+        """ Ensures the process type given can convert the initial state
+            into the final state.
+        """
+
+        process2property = {
+            "isobaric": "pressure",
+            "isothermal": "temperature",
+            "isentropic": "specific entropy"
+        }
+
+        property = process2property[self.process_type]
+
+        process_error_msg = ("\n{} process requires initial and final state to have the same {}\n"
+                             "State 1 {}: {}\n"
+                             "State 2 {}: {}")
+
+        if ((self.process_type == "isobaric" and not(isclose_quant(self.state_1.p, self.state_2.p))) or
+                (self.process_type == "isothermal" and not(isclose_quant(self.state_1.p, self.state_2.p))) or
+                (self.process_type == "isentropic" and not(isclose_quant(self.state_1.p, self.state_2.p)))):
+            raise ProcessError(process_error_msg.format(self.process_type, property,
+                                                        property, self.state_1.p,
+                                                        property, self.state_2.p))

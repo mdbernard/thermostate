@@ -93,3 +93,11 @@ ENV/
 
 # VSCode project settings
 .vscode/
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/thermostate.iml
+.idea/workspace.xml
+.idea/vcs.xml
+thermostate/tests/test_process.py
+.idea/workspace.xml___jb_tmp___
