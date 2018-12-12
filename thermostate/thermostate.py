@@ -9,6 +9,7 @@ from pint import UnitRegistry, DimensionalityError
 from pint.unit import UnitsContainer, UnitDefinition
 from pint.converters import ScaleConverter
 import matplotlib.pyplot as plt
+import numpy as np
 try:  # pragma: no cover
     from IPython.core.ultratb import AutoFormattedTB
 except ImportError:  # pragma: no cover
@@ -298,7 +299,7 @@ class State(object):
             setattr(self, '_' + prop, value)
 
 
-class Process:
+class Process(object):
     """ This class allows for visualization of thermodynamic processes.
         Supports the following types of processes:
           - isobaric
@@ -318,11 +319,12 @@ class Process:
     def __init__(self, state_1, state_2, process_type):
         self.state_1 = state_1
         self.state_2 = state_2
+        self.sub = self.state_1.sub
         self.process_type = process_type
 
-        self._validate()
+        self.validate()
 
-    def _validate(self):
+    def validate(self):
         """ Ensures the process type given can convert the initial state
             into the final state.
         """
@@ -346,7 +348,7 @@ class Process:
                                                         property, self.state_1.p,
                                                         property, self.state_2.p))
 
-    def diagram(self, vertical_axis='T', horizontal_axis='s', dome=True, approx=True):
+    def diagram(self, axis_v='T', axis_h='s', dome=True, approx=True):
         """ Creates a MatplotlLib diagram showing the process between
             the initial and final states.
 
@@ -355,18 +357,89 @@ class Process:
             vapor dome if the process touches/crosses the vapor dome.
 
             Config:
-              - vertical_axis: `str`, the property to graph on the vertical
-                axis. Must be one of 'T', 'p', 'v', 's', 'h', 'cv', 'cp'.
-              - horizontal_axis: `str`, the property to graph on the horizontal
-                axis. Must be one of 'T', 'p', 'v', 's', 'h', 'cv', 'cp'.
+              - axis_v: `str`, the property to graph on the vertical axis.
+                Must be one of 'T', 'p', 'v', 's', 'h', 'cv', 'cp'.
+              - axis_h: `str`, the property to graph on the horizontal axis.
+                Must be one of 'T', 'p', 'v', 's', 'h', 'cv', 'cp'.
               - dome: `boolean`, whether or not to show the vapor dome on the
                 diagram if the process touches/crosses the vapor dome.
               - approx: `boolean`, whether to make an approximate diagram by
                 interpolating between values. Setting to False increases
                 accuracy of graph at expense of increased processing.
+
+           TODO figure out a much more compact way to do this method
+           maybe split into multiple methods...
         """
 
-        pass
+        axes = 'T', 's', 'v', 'p', 'h', 'cv', 'cp'
+        if axis_v not in axes and axis_h not in axes:
+            raise ValueError("Neither axis given is a valid axis.\n"
+                             "Axes must both be in the set (T, s, v, p, h, cv, cp).")
+        elif axis_v not in axes:
+            raise ValueError("The vertical axis given is not one of (T, s, v, p, h, cv, cp).")
+        elif axis_h not in axes:
+            raise ValueError("The horizontal axis given is not one of (T, s, v, p, h, cv, cp).")
+
+        # TODO add support for more vertical/horiztontal axes
+        # an if/elif ladder isn't all that elegant, is there a more compact way to do this?
+
+        if axis_v == 'T':
+            range_v_lo = min(self.state_1.T, self.state_2.T)
+            range_v_hi = max(self.state_1.T, self.state_2.T)
+
+            # add 10 percent whitespace above and below diagram contents
+            range_v_lo, range_v_hi = range_v_lo - 0.1 * (range_v_hi - range_v_lo), \
+                                     range_v_hi + 0.1 * (range_v_hi - range_v_lo)
+
+            # TODO this is going to require somewhat extensive testing
+            if approx:
+                # larger increments, to be interpolated
+                range_v = np.linspace(range_v_lo, range_v_hi, 10)
+            else:
+                # smaller increments, graph just points
+                range_v = np.linspace(range_v_lo, range_v_hi, 100000)
+
+        if axis_h == 's':
+            range_h_lo = min(self.state_1.s, self.state_2.s)
+            range_h_hi = max(self.state_1.s, self.state_2.s)
+
+            # add 10 percent whitespace on either side of diagram contents
+            range_h_lo, range_h_hi = range_h_lo - 0.1 * (range_h_hi - range_h_lo), \
+                                     range_h_hi + 0.1 * (range_h_hi - range_h_lo)
 
 
+            # TODO this is going to require somewhat extensive testing
+            if approx:
+                # larger increments, to be interpolated
+                range_h= np.linspace(range_h_lo, range_h_hi, 10)
+            else:
+                # smaller increments, graph just points
+                range_h = np.linspace(range_h_lo, range_h_hi, 100000)
 
+        if axis_v == 'T' and axis_h == 's':
+            units_v = self.state_1.T.units
+            units_h = self.state_1.s.units
+            states = []
+            for i in range(len(range_v)):
+                T = range_v[i]
+                s = range_h[i]
+
+                try:
+                    states.append(State(self.sub, T=Q_(T, units_v), s=Q_(s, units_h)))
+                except StateError as e:
+                    raise StateError("Not all states could be determined using T and s.")
+
+            T = [state.T for state in states]
+            s = [state.s for state in states]
+
+        x = [spec_ent.magnitude for spec_ent in s]
+        y = [temp.magnitude for temp in T]
+
+        fig, ax = plt.subplots()
+        ax.plot(x, y)
+
+        ax.set(xlabel='specific entropy', ylabel='temperature',
+               title='T-s Diagram for {} Process for {}'.format(self.process_type, self.sub))
+        ax.grid()
+
+        plt.show()
