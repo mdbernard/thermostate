@@ -387,11 +387,6 @@ class Process(object):
                 T = state_i.T.magnitude
                 temperatures.append(T)
 
-        if dome:
-            vapor_dome = []
-            for x in np.linspace(0, 1, 250):
-
-
         fig, ax = plt.subplots()
         ax.plot(specific_entropies, temperatures)
 
