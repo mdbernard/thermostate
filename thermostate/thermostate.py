@@ -388,13 +388,9 @@ class Process(object):
 
         T_lo = min(self.state_1.T, self.state_2.T)
         T_hi = max(self.state_1.T, self.state_2.T)
-        # T_lo_buffer = T_lo - 0.1 * (T_hi - T_lo)  # buffers might need be needed due to automatic formatting
-        # T_hi_buffer = T_hi + 0.1 * (T_hi - T_lo)
 
         s_lo = min(self.state_1.s, self.state_2.s)
         s_hi = max(self.state_1.s, self.state_2.s)
-        # s_lo_buffer = s_lo - 0.1 * (s_hi - s_lo)
-        # s_hi_buffer = s_hi + 0.1 * (s_hi - s_lo)
 
         precision = 250  # how many data points from which a curve should be interpolated
 
@@ -413,8 +409,23 @@ class Process(object):
             specific_entropies = [self.state_1.s.magnitude for i in range(precision)]
             temperatures = np.linspace(T_lo.magnitude, T_hi.magnitude, precision)
 
+        # set up plot
         fig, ax = plt.subplots()
-        ax.plot(specific_entropies, temperatures)
+
+        # plot vapor dome if applicable
+        # done first so everything appears in front of vapor dome
+        # TODO
+
+        # plot process curve
+        # done first so points appear on top of curve
+        ax.plot(specific_entropies, temperatures, color="blue")
+
+        # plot and label state points
+        ax.plot(self.state_1.s.magnitude, self.state_1.T.magnitude, marker="o", color="red")
+        ax.plot(self.state_2.s.magnitude, self.state_2.T.magnitude, marker="o", color="red")
+
+        ax.annotate("1", (self.state_1.s.magnitude, self.state_1.T.magnitude))
+        ax.annotate("2", (self.state_2.s.magnitude, self.state_2.T.magnitude))
 
         ax.set(xlabel='Specific Entropy ({})'.format(str(self.state_1.s.units)),
                ylabel='Temperature ({})'.format(str(self.state_1.T.units)),
