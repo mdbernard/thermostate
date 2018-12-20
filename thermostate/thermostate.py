@@ -326,12 +326,14 @@ class Process(object):
         self.sub = self.state_1.sub
         self.process_type = process_type
 
-        self.validate()
+        self.validate()  # ensure process is possible
 
     def validate(self):
         """ Ensures the process type given can convert the initial state
             into the final state.
         """
+
+        valid_processes = ["isobaric", "isothermal", "isentropic"]  # TODO add more process types
 
         process2property = {
             "isobaric": "pressure",
@@ -339,18 +341,35 @@ class Process(object):
             "isentropic": "specific entropy"
         }
 
-        property = process2property[self.process_type]
+        if self.process_type not in valid_processes:
+            process_error_msg = ("\n The process type {} is not supported.\n"
+                                 "Process must be one of: {}")
 
-        process_error_msg = ("\n{} process requires initial and final state to have the same {}\n"
-                             "State 1 {}: {}\n"
-                             "State 2 {}: {}")
+            raise ProcessError(process_error_msg.format(self.process_type, valid_processes))
 
         if ((self.process_type == "isobaric" and not(isclose_quant(self.state_1.p, self.state_2.p))) or
-                (self.process_type == "isothermal" and not(isclose_quant(self.state_1.p, self.state_2.p))) or
-                (self.process_type == "isentropic" and not(isclose_quant(self.state_1.p, self.state_2.p)))):
-            raise ProcessError(process_error_msg.format(self.process_type, property,
-                                                        property, self.state_1.p,
-                                                        property, self.state_2.p))
+                (self.process_type == "isothermal" and not(isclose_quant(self.state_1.T, self.state_2.T))) or
+                (self.process_type == "isentropic" and not(isclose_quant(self.state_1.s, self.state_2.s)))):
+
+            property = process2property[self.process_type]
+
+            if self.process_type == "isobaric":
+                state_1_property_val = self.state_1.p
+                state_2_property_val = self.state_2.p
+            elif self.process_type == "isothermal":
+                state_1_property_val = self.state_1.T
+                state_2_property_val = self.state_2.T
+            elif self.process_type == "isentropic":
+                state_1_property_val = self.state_1.s
+                state_2_property_val = self.state_2.s
+
+            process_error_msg = ("\n{} process requires initial and final state to have the same {}\n"
+                                 "State 1 {}: {}\n"
+                                 "State 2 {}: {}")
+
+            raise ProcessError(process_error_msg.format(self.process_type.capitalize(), property,
+                                                        property, state_1_property_val,
+                                                        property, state_2_property_val))
 
     def Ts_diagram(self, dome=True):
         """ Creates a MatplotLib graph of a temperature-specific entropy diagram.
@@ -377,15 +396,22 @@ class Process(object):
         # s_lo_buffer = s_lo - 0.1 * (s_hi - s_lo)
         # s_hi_buffer = s_hi + 0.1 * (s_hi - s_lo)
 
+        precision = 250  # how many data points from which a curve should be interpolated
 
         if self.process_type == "isobaric":
-            specific_entropies = np.linspace(s_lo.magnitude, s_hi.magnitude, 250)
+            specific_entropies = np.linspace(s_lo.magnitude, s_hi.magnitude, precision)
             pressure = self.state_1.p
             temperatures = []
             for specific_entropy in specific_entropies:
                 state_i = State(self.sub, p=pressure, s=Q_(specific_entropy, self.state_1.s.units))
                 T = state_i.T.magnitude
                 temperatures.append(T)
+        elif self.process_type == "isothermal":
+            specific_entropies = np.linspace(s_lo.magnitude, s_hi.magnitude, precision)
+            temperatures = [self.state_1.T.magnitude for i in range(precision)]
+        elif self.process_type == "isentropic":
+            specific_entropies = [self.state_1.s.magnitude for i in range(precision)]
+            temperatures = np.linspace(T_lo.magnitude, T_hi.magnitude, precision)
 
         fig, ax = plt.subplots()
         ax.plot(specific_entropies, temperatures)
